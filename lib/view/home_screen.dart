@@ -70,15 +70,18 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> listCategories() {
     List<Widget> addCategories = [];
 
-    addCategories.add(Consumer<CartProvider>(builder: (_, cartModel, child){
-      return Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        child: ExpansionTile(
-          title: const Text('Popular items'),
-          textColor: Const.appPrimaryColor,
-          children: listPopularItemsData(cartProvider.popularItems),
-        ),
-      );
+    addCategories.add(Consumer<CartProvider>(builder: (_, cartModel, child) {
+      return (cartModel.popularItems.isNotEmpty)
+          ? Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)),
+              child: ExpansionTile(
+                title: const Text('Popular items'),
+                textColor: Const.appPrimaryColor,
+                children: listPopularItemsData(cartProvider.popularItems),
+              ),
+            )
+          : const SizedBox.shrink();
     }));
 
     fetchedData!.forEach((category, data) {
