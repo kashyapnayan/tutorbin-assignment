@@ -76,8 +76,11 @@ class _HomeScreenState extends State<HomeScreen> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15)),
               child: ExpansionTile(
-                title: const Text('Popular items'),
+                title: const Text('Popular items', style: TextStyle(fontSize: 16),),
                 textColor: Const.appPrimaryColor,
+                collapsedIconColor: Colors.black,
+                iconColor: Const.appPrimaryColor,
+                collapsedTextColor: Colors.black,
                 children: listPopularItemsData(cartProvider.popularItems),
               ),
             )
@@ -88,8 +91,11 @@ class _HomeScreenState extends State<HomeScreen> {
       addCategories.add(Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: ExpansionTile(
-          title: Text(category.toString()),
+          title: Text(category.toString(),style: const TextStyle(fontSize: 16),),
           textColor: Const.appPrimaryColor,
+          collapsedIconColor: Colors.black,
+          iconColor: Const.appPrimaryColor,
+          collapsedTextColor: Colors.black,
           children: listCategoriesData(fetchedData![category]),
         ),
       ));

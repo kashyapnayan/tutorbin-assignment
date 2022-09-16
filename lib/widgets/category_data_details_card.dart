@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tutorbin/const/Const.dart';
 import 'package:tutorbin/model/category_details_model.dart';
