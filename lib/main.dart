@@ -3,7 +3,7 @@ import 'package:tutorbin/providers/cart_provider.dart';
 import 'package:tutorbin/view/home_screen.dart';
 import 'package:provider/provider.dart';
 
-import 'const/Const.dart';
+import 'const/const.dart';
 import 'providers/home_provider.dart';
 
 void main() {

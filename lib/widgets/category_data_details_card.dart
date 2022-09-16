@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tutorbin/const/Const.dart';
+import 'package:tutorbin/const/const.dart';
 import 'package:tutorbin/model/category_details_model.dart';
 import 'package:tutorbin/widgets/add_remove_button.dart';
 
@@ -98,6 +98,8 @@ class _CategoryDataDetailsCardState extends State<CategoryDataDetailsCard> {
   }
 
   ///returns the best seller widget
+  ///The [Best Seller] teg will come only for those items
+  ///which has been ordered more than one time
   Widget bestSellerTag() {
     return Container(
       padding: const EdgeInsets.only(

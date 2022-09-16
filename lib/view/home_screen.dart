@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tutorbin/const/Const.dart';
+import 'package:tutorbin/const/const.dart';
 import 'package:tutorbin/model/category_details_model.dart';
 import 'package:tutorbin/providers/cart_provider.dart';
 import 'package:tutorbin/providers/home_provider.dart';
@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: (fetchedData != null && fetchedData!.isNotEmpty)
             ? SingleChildScrollView(child: _loadData())
             : showProgressIndicator(),
-        floatingActionButton: PlaceOrderButton(),
+        floatingActionButton: const PlaceOrderButton(),
       );
     });
   }
@@ -67,9 +67,15 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  ///List Items category wise along with popular item
+  ///The [Best Seller] teg will come only for those items
+  ///which has been ordered more than one time
   List<Widget> listCategories() {
     List<Widget> addCategories = [];
 
+    ///this will render popular items if any
+    ///if an order is placed for that item that item will be render
+    ///with the help of this From line[76 to 97]
     addCategories.add(Consumer<CartProvider>(builder: (_, cartModel, child) {
       return (cartModel.popularItems.isNotEmpty)
           ? Card(
@@ -80,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('Popular items', style: TextStyle(fontSize: 16),),
-                    Text('${cartProvider.popularItems.length}',style: TextStyle(fontSize: 16),)
+                    Text('${cartProvider.popularItems.length}',style: const TextStyle(fontSize: 16),)
                   ],
                 ),
                 textColor: Const.appPrimaryColor,
@@ -93,6 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
           : const SizedBox.shrink();
     }));
 
+    ///This will render the each category available in [menu.json] asset file
     fetchedData!.forEach((category, data) {
       addCategories.add(Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -101,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(category.toString(),style: const TextStyle(fontSize: 16),),
-              Text('${fetchedData![category].length}',style: TextStyle(fontSize: 16),)
+              Text('${fetchedData![category].length}',style: const TextStyle(fontSize: 16),)
             ],
           ),
           textColor: Const.appPrimaryColor,
@@ -118,6 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return addCategories;
   }
 
+  ///this method renders items for each category
   List<Widget> listCategoriesData(List categoryData) {
     List<Widget> addCategoriesData = [];
     for (int i = 0; i < categoryData.length; i++) {
@@ -129,6 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return addCategoriesData;
   }
 
+  ///This method renders the popular items
   List<Widget> listPopularItemsData(
       Map<String, CategoryDetailsModel> popularItems) {
     List<Widget> addPopularData = [];

@@ -12,12 +12,4 @@ class CategoryDetailsModel {
     price = json['price'];
     instock = json['instock'];
   }
-
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['name'] = this.name;
-    data['price'] = this.price;
-    data['instock'] = this.instock;
-    return data;
-  }
 }

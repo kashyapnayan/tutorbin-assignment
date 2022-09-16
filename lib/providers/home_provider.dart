@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tutorbin/const/Const.dart';
+import 'package:tutorbin/const/const.dart';
 
 class HomeProvider with ChangeNotifier {
   final List<String> _categories = [];

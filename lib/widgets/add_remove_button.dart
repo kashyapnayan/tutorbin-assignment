@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tutorbin/const/Const.dart';
+import 'package:tutorbin/const/const.dart';
 import 'package:tutorbin/model/category_details_model.dart';
 import 'package:tutorbin/providers/cart_provider.dart';
 

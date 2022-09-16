@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tutorbin/providers/cart_provider.dart';
 import 'package:tutorbin/services/services.dart';
 
-import '../const/Const.dart';
+import '../const/const.dart';
 
 class PlaceOrderButton extends StatefulWidget {
   const PlaceOrderButton({Key? key}) : super(key: key);
