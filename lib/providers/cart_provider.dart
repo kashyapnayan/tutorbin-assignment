@@ -1,36 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:tutorbin/model/cart_item_model.dart';
-import 'package:tutorbin/model/popular_items_model.dart';
+import 'package:tutorbin/model/category_details_model.dart';
 
 class CartProvider with ChangeNotifier {
-  final Map<String, CartItemModel> _inCartItems = {};
+  final Map<String, CategoryDetailsModel> _inCartItems = {};
 
-  Map<String, CartItemModel> get inCartItems => _inCartItems;
+  Map<String, CategoryDetailsModel> get inCartItems => _inCartItems;
 
   late double _totalAmount = 0.0;
 
   double get totalAmount => _totalAmount;
 
-  final Map<String, PopularItemsModel> _popularItems = {};
+  final Map<String, CategoryDetailsModel> _popularItems = {};
 
-  Map<String, PopularItemsModel> get popularItems => _popularItems;
-
-  late bool _isPlacingOrder = false;
-
-  bool get isPlacingOrder => _isPlacingOrder;
+  Map<String, CategoryDetailsModel> get popularItems => _popularItems;
 
   ///this method will add the item to Cart
-  void addItemToCart(String itemName, int itemPrice) {
+  void addItemToCart(String itemName, int itemPrice, bool inStock) {
     if (_inCartItems.containsKey(itemName)) {
       _inCartItems.update(
           itemName,
-          (existingCartItem) => CartItemModel(
+          (existingCartItem) => CategoryDetailsModel(
               name: existingCartItem.name,
               price: existingCartItem.price,
-              quantity: existingCartItem.quantity + 1));
+              instock: inStock,
+              quantity: existingCartItem.quantity! + 1));
     } else {
-      _inCartItems.putIfAbsent(itemName,
-          () => CartItemModel(name: itemName, price: itemPrice, quantity: 1));
+      _inCartItems.putIfAbsent(
+          itemName,
+          () => CategoryDetailsModel(
+              name: itemName, instock: inStock,price: itemPrice, quantity: 1));
     }
     _totalAmount += itemPrice;
     notifyListeners();
@@ -39,14 +37,14 @@ class CartProvider with ChangeNotifier {
   ///this method will reduce the item quantity by one from the cart
   void reduceItemByOne(String itemName) {
     if (_inCartItems.containsKey(itemName)) {
-      CartItemModel localItem;
+      CategoryDetailsModel localItem;
       _inCartItems.update(itemName, (existingCartItem) {
         localItem = existingCartItem;
-        _totalAmount -= localItem.price;
-        return CartItemModel(
+        _totalAmount -= localItem.price!;
+        return CategoryDetailsModel(
             name: existingCartItem.name,
             price: existingCartItem.price,
-            quantity: existingCartItem.quantity - 1);
+            quantity: existingCartItem.quantity! - 1);
       });
     }
     notifyListeners();
@@ -59,7 +57,7 @@ class CartProvider with ChangeNotifier {
 
   ///this method will remove the item from cart
   void removeItem(String itemName) {
-    _totalAmount -= _inCartItems[itemName]!.price;
+    _totalAmount -= _inCartItems[itemName]!.price!;
     _inCartItems.remove(itemName);
     notifyListeners();
   }
@@ -73,23 +71,26 @@ class CartProvider with ChangeNotifier {
 
   ///this method will add items to popular Products for which order was placed
   void placeOrder() {
-    _isPlacingOrder = true;
     _inCartItems.forEach((itemName, cartItemModel) {
       if (_popularItems.containsKey(itemName)) {
         _popularItems.update(
             itemName,
-            (existingItem) => PopularItemsModel(
+            (existingItem) => CategoryDetailsModel(
                 name: itemName,
                 price: cartItemModel.price,
-                orderCount: existingItem.orderCount + 1));
+                instock: cartItemModel.instock,
+                orderCount: existingItem.orderCount! + 1));
       } else {
         _popularItems.putIfAbsent(
             itemName,
-            () => PopularItemsModel(
-                name: itemName, price: cartItemModel.price, orderCount: 1));
+            () => CategoryDetailsModel(
+                  name: itemName,
+                  price: cartItemModel.price,
+                  instock: cartItemModel.instock,
+                  orderCount: 1,
+                ));
       }
     });
-    _isPlacingOrder = false;
     clearCart();
     notifyListeners();
   }

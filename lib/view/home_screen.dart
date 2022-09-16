@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tutorbin/const/Const.dart';
 import 'package:tutorbin/model/category_details_model.dart';
-import 'package:tutorbin/model/popular_items_model.dart';
 import 'package:tutorbin/providers/cart_provider.dart';
 import 'package:tutorbin/providers/home_provider.dart';
 import 'package:tutorbin/widgets/category_data_details_card.dart';
@@ -82,7 +81,6 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     }));
 
-
     fetchedData!.forEach((category, data) {
       addCategories.add(Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -110,14 +108,13 @@ class _HomeScreenState extends State<HomeScreen> {
     return addCategoriesData;
   }
 
-  List<Widget> listPopularItemsData(Map<String, PopularItemsModel> popularItems) {
+  List<Widget> listPopularItemsData(
+      Map<String, CategoryDetailsModel> popularItems) {
     List<Widget> addPopularData = [];
     popularItems.forEach((itemName, popularItem) {
-      addPopularData.add(CategoryDataDetailsCard(
-          categoryDetailsModel:
-          CategoryDetailsModel.fromJson(fetchedData![popularItem.name])));
+      addPopularData
+          .add(CategoryDataDetailsCard(categoryDetailsModel: popularItem));
     });
-
 
     return addPopularData;
   }

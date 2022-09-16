@@ -70,7 +70,9 @@ class _AddRemoveButtonState extends State<AddRemoveButton> {
                     onTap: () {
                       cartProvider.addItemToCart(
                           widget.categoryDetailsModel!.name!,
-                          widget.categoryDetailsModel!.price!);
+                          widget.categoryDetailsModel!.price!,
+                          widget.categoryDetailsModel!.instock!,
+                      );
                     },
                     child: Text("+",
                         style: TextStyle(
@@ -84,7 +86,8 @@ class _AddRemoveButtonState extends State<AddRemoveButton> {
           : GestureDetector(
               onTap: () {
                 cartProvider.addItemToCart(widget.categoryDetailsModel!.name!,
-                    widget.categoryDetailsModel!.price!);
+                    widget.categoryDetailsModel!.price!,
+                    widget.categoryDetailsModel!.instock!);
               },
               child: Container(
                 padding: const EdgeInsets.only(
