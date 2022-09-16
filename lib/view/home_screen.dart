@@ -76,7 +76,13 @@ class _HomeScreenState extends State<HomeScreen> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15)),
               child: ExpansionTile(
-                title: const Text('Popular items', style: TextStyle(fontSize: 16),),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Popular items', style: TextStyle(fontSize: 16),),
+                    Text('${cartProvider.popularItems.length}',style: TextStyle(fontSize: 16),)
+                  ],
+                ),
                 textColor: Const.appPrimaryColor,
                 collapsedIconColor: Colors.black,
                 iconColor: Const.appPrimaryColor,
@@ -91,7 +97,13 @@ class _HomeScreenState extends State<HomeScreen> {
       addCategories.add(Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: ExpansionTile(
-          title: Text(category.toString(),style: const TextStyle(fontSize: 16),),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(category.toString(),style: const TextStyle(fontSize: 16),),
+              Text('${fetchedData![category].length}',style: TextStyle(fontSize: 16),)
+            ],
+          ),
           textColor: Const.appPrimaryColor,
           collapsedIconColor: Colors.black,
           iconColor: Const.appPrimaryColor,
