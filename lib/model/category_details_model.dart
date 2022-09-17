@@ -1,6 +1,6 @@
 class CategoryDetailsModel {
   String? name;
-  int? price;
+  double? price;
   bool? instock;
   int? orderCount;
   int? quantity;
@@ -9,7 +9,7 @@ class CategoryDetailsModel {
 
   CategoryDetailsModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
-    price = json['price'];
+    price = double.parse(double.parse(json['price'].toString()).toStringAsFixed(2));
     instock = json['instock'];
   }
 }

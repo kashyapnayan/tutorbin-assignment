@@ -58,7 +58,10 @@ class _CategoryDataDetailsCardState extends State<CategoryDataDetailsCard> {
                       height: 5,
                     ),
                     Text(
-                        "\$ ${widget.categoryDetailsModel?.price.toString() ?? "N/A"}",
+                        "\$ ${(widget.categoryDetailsModel != null &&
+                            widget.categoryDetailsModel!.price != null) ?
+                        double.parse(widget.categoryDetailsModel!.price!.toString()).toStringAsFixed(2) :
+                        "N/A"}",
                         style: const TextStyle(
                           color: Colors.grey,
                           fontSize: 16,
@@ -102,17 +105,14 @@ class _CategoryDataDetailsCardState extends State<CategoryDataDetailsCard> {
   ///which has been ordered more than one time
   Widget bestSellerTag() {
     return Container(
-      padding: const EdgeInsets.only(
-          left: 15, right: 15, top: 7, bottom: 7),
+      padding: const EdgeInsets.only(left: 15, right: 15, top: 7, bottom: 7),
       decoration: BoxDecoration(
         color: Const.bestSellerColor,
-        borderRadius:
-        BorderRadiusDirectional.circular(15),
+        borderRadius: BorderRadiusDirectional.circular(15),
       ),
       child: const Text(
         'Best Seller',
-        style: TextStyle(
-            color: Colors.white, fontSize: 14),
+        style: TextStyle(color: Colors.white, fontSize: 14),
       ),
     );
   }

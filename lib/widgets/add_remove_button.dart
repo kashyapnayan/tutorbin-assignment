@@ -29,8 +29,7 @@ class _AddRemoveButtonState extends State<AddRemoveButton> {
       return (cartProvider.inCartItems
               .containsKey(widget.categoryDetailsModel?.name))
           ? Container(
-              padding:
-                  const EdgeInsets.only(top: 8, bottom: 8, left: 10, right: 10),
+              padding: const EdgeInsets.only(left: 10, right: 10),
               decoration: BoxDecoration(
                 border: Border.all(color: Const.appPrimaryColor, width: 2),
                 color: Colors.white,
@@ -51,33 +50,47 @@ class _AddRemoveButtonState extends State<AddRemoveButton> {
                             widget.categoryDetailsModel!.name!);
                       }
                     },
-                    child: Text("-",
+                    child: Text(" - ",
                         style: TextStyle(
                             color: Const.appPrimaryColor,
-                            fontSize: 18,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold)),
                   ),
-                  Text(
-                      cartProvider
-                          .inCartItems[widget.categoryDetailsModel?.name]!
-                          .quantity
-                          .toString(),
-                      style: TextStyle(
-                          color: Const.appPrimaryColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold)),
+                  Container(
+                    padding: const EdgeInsets.only(
+                      top: 6,
+                      bottom: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Const.appPrimaryColor,
+                      borderRadius: BorderRadiusDirectional.circular(15),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10.0, right: 10),
+                      child: Text(
+                          cartProvider
+                              .inCartItems[widget.categoryDetailsModel?.name]!
+                              .quantity
+                              .toString(),
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ),
                   GestureDetector(
                     onTap: () {
                       cartProvider.addItemToCart(
-                          widget.categoryDetailsModel!.name!,
-                          widget.categoryDetailsModel!.price!,
-                          widget.categoryDetailsModel!.instock!,
+                        widget.categoryDetailsModel!.name!,
+                        double.parse(widget.categoryDetailsModel!.price!
+                            .toStringAsFixed(2)),
+                        widget.categoryDetailsModel!.instock!,
                       );
                     },
-                    child: Text("+",
+                    child: Text(" + ",
                         style: TextStyle(
                             color: Const.appPrimaryColor,
-                            fontSize: 18,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold)),
                   )
                 ],
@@ -85,8 +98,10 @@ class _AddRemoveButtonState extends State<AddRemoveButton> {
             )
           : GestureDetector(
               onTap: () {
-                cartProvider.addItemToCart(widget.categoryDetailsModel!.name!,
-                    widget.categoryDetailsModel!.price!,
+                cartProvider.addItemToCart(
+                    widget.categoryDetailsModel!.name!,
+                    double.parse(widget.categoryDetailsModel!.price!
+                        .toStringAsFixed(2)),
                     widget.categoryDetailsModel!.instock!);
               },
               child: Container(

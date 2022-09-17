@@ -6,7 +6,7 @@ class CartProvider with ChangeNotifier {
 
   Map<String, CategoryDetailsModel> get inCartItems => _inCartItems;
 
-  late double _totalAmount = 0.0;
+  late double _totalAmount = 0.00;
 
   double get totalAmount => _totalAmount;
 
@@ -15,7 +15,7 @@ class CartProvider with ChangeNotifier {
   Map<String, CategoryDetailsModel> get popularItems => _popularItems;
 
   ///this method will add the item to Cart
-  void addItemToCart(String itemName, int itemPrice, bool inStock) {
+  void addItemToCart(String itemName, double itemPrice, bool inStock) {
     if (_inCartItems.containsKey(itemName)) {
       _inCartItems.update(
           itemName,

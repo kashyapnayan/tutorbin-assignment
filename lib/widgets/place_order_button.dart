@@ -47,7 +47,7 @@ class _PlaceOrderButtonState extends State<PlaceOrderButton> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
                     child: Text(
-                      'Place Order \$${model.totalAmount}',
+                      'Place Order \$${model.totalAmount.toStringAsFixed(2)}',
                       style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
